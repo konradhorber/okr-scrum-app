@@ -1,0 +1,12 @@
+FROM node:22-alpine
+WORKDIR /app
+
+# Copy package and install dependencies
+COPY package.json package-lock.json* ./
+RUN npm install
+
+# Copy all source files
+COPY . .
+
+# Use the development command (which uses nodemon)
+CMD ["npm", "run", "dev"]
