@@ -3,10 +3,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    env_file: .env
+    depends_on:
+      - postgres
     ports:
-      - "3000:3000"
+      - 3000:3000
     volumes:
       - .:/app
       - /app/node_modules
-    environment:
-      - NODE_ENV=development
+  postgres:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    env_file: .env
+    volumes:
+      - ./devInit.sql:/docker-entrypoint-initdb.d/devInit.sql
