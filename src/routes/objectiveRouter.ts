@@ -1,10 +1,21 @@
 import express from 'express';
-import { getObjectives } from '../controllers/objectives';
+import { 
+    getObjectives,
+    createObjective,
+    getObjective,
+    updateObjective,
+    deleteObjective
+ } from '../controllers/objectivesController';
 
-const objectiveRouter = express.Router();
+const objectivesRouter = express.Router();
 
-objectiveRouter.get('/', (req: express.Request, res: express.Response) => {
-    getObjectives(req, res);
-});
+objectivesRouter.route('/')
+    .get(getObjectives)
+    .post(createObjective);
 
-module.exports = objectiveRouter;
+objectivesRouter.route('/:id')
+    .get(getObjective)
+    .put(updateObjective)
+    .delete(deleteObjective);
+
+export default objectivesRouter;
