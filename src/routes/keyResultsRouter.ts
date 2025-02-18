@@ -1,9 +1,9 @@
 import express from 'express';
+import { getObjectives } from '../controllers/objectivesController';
 
 const keyResultsRouter = express.Router();
 
-keyResultsRouter.get('/', (req: express.Request, res: express.Response) => {
-    res.send('Key result Router');
-});
+keyResultsRouter.route('/')
+    .get(getObjectives);
 
 export default keyResultsRouter;

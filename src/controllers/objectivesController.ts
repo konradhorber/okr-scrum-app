@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import pool from '../../db/pool';
+import * as objectivesModel from '../models/objectivesModel';
 
 export const getObjectives = async (req: Request, res: Response) => {
     try {
-        const result = await pool.query('SELECT * FROM objective');
-        res.status(200).json(result.rows);
+        console.log('getObjectives');
+        const objectives = await objectivesModel.getObjectives();
+        console.log('objectives', objectives);
+        res.status(200).json(objectives);
     } catch (error) {
         res.status(500).json({ message: 'Database connection error', error });
     }
